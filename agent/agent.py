@@ -59,7 +59,7 @@ class Agent():
         self.num_actions = None
         self.previous_tiles = None
 
-    def agent_init(self, agent_info={}):
+    def init(self, agent_info={}):
         # Setup for the agent called when the experiment first starts.
         self.num_tilings = agent_info.get("num_tilings")
         self.num_tiles = agent_info.get("num_tiles")
@@ -99,7 +99,7 @@ class Agent():
         # return chosen_action and the action value of the chosen action
         return chosen_action, action_values[chosen_action], action_values
 
-    def agent_start(self, state):
+    def start(self, state):
         # set position and velocity from state
         position, velocity = state
         
@@ -119,7 +119,7 @@ class Agent():
         # return self.last_action
         return self.last_action
 
-    def agent_step(self, reward, state):
+    def step(self, reward, state):
         # set position and velocity from state
         position, velocity = state
 
@@ -155,7 +155,7 @@ class Agent():
         self.previous_tiles = np.copy(active_tiles)
         return self.last_action
 
-    def agent_end(self, reward):
+    def end(self, reward):
         # initalized feature_vector to all zeors
         feature_vector = np.zeros(self.iht_size)
         for i in self.previous_tiles:

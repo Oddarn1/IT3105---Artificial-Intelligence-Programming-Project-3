@@ -32,7 +32,6 @@ def hashcoords(coordinates, m, readonly=False):
     if m==None: return coordinates
 
 from math import floor
-from itertools import zip_longest
 
 def tiles (ihtORsize, numtilings, floats, ints=[], readonly=False):
     qfloats = [floor(f*numtilings) for f in floats]
@@ -43,21 +42,6 @@ def tiles (ihtORsize, numtilings, floats, ints=[], readonly=False):
         b = tiling
         for q in qfloats:
             coords.append( (q + b) // numtilings )
-            b += tilingX2
-        coords.extend(ints)
-        Tiles.append(hashcoords(coords, ihtORsize, readonly))
-    return Tiles
-
-def tileswrap (ihtORsize, numtilings, floats, wrapwidths, ints=[], readonly=False):
-    qfloats = [floor(f*numtilings) for f in floats]
-    Tiles = []
-    for tiling in range(numtilings):
-        tilingX2 = tiling*2
-        coords = [tiling]
-        b = tiling
-        for q, width in zip_longest(qfloats, wrapwidths):
-            c = (q + b%numtilings) // numtilings
-            coords.append(c%width if width else c)
             b += tilingX2
         coords.extend(ints)
         Tiles.append(hashcoords(coords, ihtORsize, readonly))

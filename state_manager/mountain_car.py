@@ -16,7 +16,7 @@ class MountainCar():
         self.gravity = None
         self.action_discount = None
 
-    def env_init(self, env_info={}):
+    def init(self, env_info={}):
         '''
         Assume env_info dict conatins:
         {
@@ -39,7 +39,7 @@ class MountainCar():
         local_state = 0
         self.reward_state_term = (0.0, local_state, False)
          
-    def env_start(self):
+    def start(self):
         # set starting reward, position, and velocity
         # reward = 0.0
         position = np.random.uniform(-0.6, -0.4)
@@ -49,7 +49,7 @@ class MountainCar():
 
         return self.current_state
 
-    def env_step(self, action):
+    def step(self, action):
         # set last_postion and last_velocity from self.reward_state_term
         last_position, last_velocity = self.current_state
 

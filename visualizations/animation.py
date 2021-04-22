@@ -14,7 +14,7 @@ class Animation():
         self.point, = ax.plot(starting_pos, self.y_func(starting_pos), 'o')
 
     def plot_curve(self):
-        ani = FuncAnimation(self.fig, self.update, interval=10, blit=True, repeat=False, frames=self.positions)
+        ani = FuncAnimation(self.fig, self.update, interval=10, blit=True, repeat=True, frames=self.positions)
         ani.save("animations/animation.gif", writer="imagemagick", fps=60)
         plt.show()
 

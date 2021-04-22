@@ -1,10 +1,4 @@
 class Trainer:
-    """RLGlue class
-    args:
-        env_name (string): the name of the module where the Environment class can be found
-        agent_name (string): the name of the module where the Agent class can be found
-    """
-
     def __init__(self, state_manager, agent):
         self.state_manager = state_manager()
         self.agent = agent()
@@ -16,9 +10,9 @@ class Trainer:
 
     def init(self, agent_init_info={}, env_init_info={}):
         # Initialize with parameters for state manager and agent
-        self.state_manager.env_init(env_init_info)
-        self.agent.agent_init(agent_init_info)
-
+        self.state_manager.init(env_init_info)
+        self.agent.init(agent_init_info)
+        # Initialize different counters
         self.total_reward = 0.0
         self.num_steps = 0
         self.num_episodes = 0
@@ -27,25 +21,25 @@ class Trainer:
         self.total_reward = 0.0
         self.num_steps = 1
 
-        last_state = self.state_manager.env_start()
-        self.last_action = self.agent.agent_start(last_state)
+        last_state = self.state_manager.start()
+        self.last_action = self.agent.start(last_state)
 
         observation = (last_state, self.last_action)
 
         return observation
 
     def step(self):
-        (reward, last_state, term) = self.state_manager.env_step(self.last_action)
+        (reward, last_state, term) = self.state_manager.step(self.last_action)
 
         self.total_reward += reward
 
         if term:
             self.num_episodes += 1
-            self.agent.agent_end(reward)
+            self.agent.end(reward)
             roat = (reward, last_state, None, term)
         else:
             self.num_steps += 1
-            self.last_action = self.agent.agent_step(reward, last_state)
+            self.last_action = self.agent.step(reward, last_state)
             roat = (reward, last_state, self.last_action, term)
 
         return roat
