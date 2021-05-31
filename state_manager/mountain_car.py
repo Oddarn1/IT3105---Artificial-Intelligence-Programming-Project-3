@@ -65,7 +65,7 @@ class MountainCar():
         position = last_position + velocity
         # checked position reached goal
         if position >= self.max_position:
-            reward = -1
+            reward = 1
             is_terminal = True
             self.current_state = None
         # checked position within environment bounds 

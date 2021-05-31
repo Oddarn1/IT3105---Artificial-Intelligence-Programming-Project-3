@@ -7,7 +7,7 @@ import numpy as np
 
 def run(episodes):
     all_steps = []
-    epsilon = 1
+    epsilon = 0
     # set agent and evviroment
     agent = Agent
     env = MountainCar
@@ -35,5 +35,5 @@ def run(episodes):
     Plots.scatterplot(all_steps, (len(all_steps), 1000))
 
 if __name__ == "__main__":
-    episodes = 100
+    episodes = 1
     run(episodes)
